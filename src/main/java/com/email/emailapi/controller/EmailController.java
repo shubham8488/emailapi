@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.email.emailapi.model.EmailRequest;
+import com.email.emailapi.model.EmailResponse;
 import com.email.emailapi.service.EmailService;
 
 @RestController
@@ -38,8 +39,8 @@ public class EmailController {
 			message="Email Send successfully !";
 		}
 		else {
-			message="Email Send unsuccessful";
+			return new ResponseEntity<>(new EmailResponse("Email Send unsuccessfully !") , HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<>(Map.of("Message",message) , HttpStatus.OK);
+		return new ResponseEntity<>(new EmailResponse(message) , HttpStatus.OK);
 	}
 }
